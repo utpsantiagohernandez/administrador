@@ -1,0 +1,17 @@
+{
+    "name": "santiago/administrador",
+    "description": "Proyecto de despensa digital",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "./clases"
+        }
+    },
+    "authors": [
+        {
+            "name": "utpsantiagohernandez",
+            "email": "santigo.hernandez@utponiente.edu.mx"
+        }
+    ],
+    "require": {}
+}

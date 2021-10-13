@@ -5,6 +5,7 @@ html{
 body{
     font-family: 'IBM Plex Sans', sans-serif;
     color: #172B4D;
+    background-color: #F4F5F7;
 }
 
 .logotipo{
@@ -19,6 +20,10 @@ body{
 .bg-color-azul{
     background-color: #B3D4FF;
     color: #172B4D;
+}
+
+.fondo-encabezados{
+    background-color: #DFE1E6;
 }
 
 
