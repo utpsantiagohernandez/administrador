@@ -26,7 +26,7 @@
  
 
 
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <img src="img/logotipo.png" alt="logotipo.svg" width="154" height="64">
@@ -80,7 +80,7 @@
             <a href="#" class="btn btn-lg btn-primary">Ver accesos rápidos</a>
         </div>
     </main>
- -->
+
 
     <script src="js/bootstrap.js"></script>
 </body>

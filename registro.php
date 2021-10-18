@@ -1,10 +1,3 @@
-<?php
-	require 'app.php';
-	use App\Usuarios;
-	$propiedades = Usuarios::all();
-?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -27,32 +20,29 @@
     <section>
         <div class="container">
             <div class="row justify-content-lg-center">
-                <form class="col-lg-5">
-                      <img src="img/logotipo.png" alt="logotipo.png" class="logotipo d-flex justify-content-center"
-                        aling="center">
+                <form class="col-lg-5" id="formRegistro" method="post" action="usuario/crear.php" enctype="multipart/form-data">
+                    <img src="img/logotipo.png" alt="logotipo.png" class="logotipo d-flex justify-content-center" aling="center">
                     <div class="card p-3 p-lg-4">
                         <h1 class="text-center fs-4 my-3">Crear tu incríble cuenta</h1>
-                        <?php foreach( $propiedades as $propiedad ): ?>
+                        <div id="messages"></div>
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="name"
-                                        aria-describedby="Nombre" value="<?php echo $propiedad->nombre; ?>">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="aUsuarios[nombres]"  aria-describedby="Nombre">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <label for="correo" class="form-label">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="correo" name="aUsuarios[correo]" aria-describedby="emailHelp">
                                     <div id="emailHelp" class="form-text small"><i class="fas fa-info-circle me-1"></i>Nunca
                                         compartiremos su correo electrónico con nadie</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1">
+                                    <label for="contrasenia" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="contrasenia" name="aUsuarios[contrasenia]">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="passwordConfirm" class="form-label">Confirmar Contraseña</label>
-                                    <input type="passwordConfirm" class="form-control" id="passwordConfirm">
+                                    <label for="contraseniaConfirm" class="form-label">Confirmar Contraseña</label>
+                                    <input type="password" class="form-control" id="contraseniaConfirm">
                                 </div>
                                 <div class="d-grid gap-2">
                                     <button type="submit" class="btn btn-primary">Registrarse</button>
@@ -63,7 +53,6 @@
                                     " class="btn btn-link">Iniciar sesión</a>
                                 </div>
                             </div>
-                        <?php endforeach ?>
                     </div>
                 </form>
             </div>
@@ -71,7 +60,7 @@
                 <div class="col-lg-5">
                     <div class="row justify-content-center">
                         <div class="col-6 col-lg-5">
-                           <a href="#" class="btn btn-link seguridad-legal">Aviso de privavidad</a>
+                            <a href="#" class="btn btn-link seguridad-legal">Aviso de privavidad</a>
                         </div>
                         <div class="col-6 col-lg-5">
                             <a href="#" class="btn btn-link seguridad-legal">Términos y condiciones</a>
@@ -87,7 +76,32 @@
             <p>© 2021 Atlassian Ltd. Todos los derechos reservados</p>
         </div>
     </footer>
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script type="text/javascript">
+        var frm = $('#formRegistro');
+        frm.submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: frm.attr('method'),
+                url: frm.attr('action'),
+                data: frm.serialize(),
+                success: function(data) {
+                    console.log('Submission was successful.');
+                    console.log(data);
+                    $('#messages').html(data);
+                    var x=$('#exito').val();
+                    if(x==1){
+                        window.location.replace("http://localhost/administrador/index.php");
+                    }
+                },
+                error: function(data) {
+                    console.log('An error occurred.');
+                    console.log(data);
+                },
+            });
+        });
+    </script>
 </body>
 
 </html>

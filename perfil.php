@@ -1,7 +1,9 @@
 <?php
-  require 'app.php';
-  use App\Clientes;
-  $clientesBD = Clientes::find(3);
+require 'app.php';
+
+use App\Clientes;
+
+$clientesBD = Clientes::find(3);
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +48,7 @@
       </div>
 
       <div class="col-lg-9">
-      <div id="messages"></div>
+        <div id="messages"></div>
         <div class="card">
           <div class="card-body">
             <div class="tab-content" id="v-pills-tabContent">
@@ -117,25 +119,25 @@
   </div>
 
   <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+  <script src="js/bootstrap.js"></script>
   <script type="text/javascript">
     var frm = $('#formDirection');
-    frm.submit(function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: frm.attr('method'),
-            url: frm.attr('action'),
-            data: frm.serialize(),
-            success: function (data) {
-                console.log('Submission was successful.');
-                console.log(data);
-                $('#messages').html(data);
-            },
-            error: function (data) {
-                console.log('An error occurred.');
-                console.log(data);
-            },
-        });
+    frm.submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+        type: frm.attr('method'),
+        url: frm.attr('action'),
+        data: frm.serialize(),
+        success: function(data) {
+          console.log('Submission was successful.');
+          console.log(data);
+          $('#messages').html(data);
+        },
+        error: function(data) {
+          console.log('An error occurred.');
+          console.log(data);
+        },
+      });
     });
   </script>
 
