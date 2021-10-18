@@ -20,7 +20,6 @@ class Usuarios{
         $this->correo = $args['correo'] ?? '';
         $this->contrasenia = $args['contrasenia'] ?? '';
     }
-
      // Definir la conexión a la BD
      public static function setDB($database){
         self::$db = $database;
@@ -71,7 +70,7 @@ class Usuarios{
         $atributos = $this->atributos();
         $sanitizado = [];
         foreach($atributos as $key => $value){
-            $sanitizado[$key] = self::$db->escape_string($value);
+            $sanitizado[$key] = self::$db->escape_string(md5($value));
         }
         return $sanitizado;
     }
