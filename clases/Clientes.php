@@ -6,7 +6,7 @@ class Clientes{
 
     //Base de datos
     protected static $db;
-    protected static $columnasDB = ['idclientes', 'direccion','colonia', 'ciudad', 'estado', 'cp'];
+    protected static $columnasDB = ['idclientes', 'direccion','colonia', 'ciudad', 'estado', 'cp','idusuarios'];
     protected static $errores = [];
 
     public $idclientes;
@@ -15,7 +15,7 @@ class Clientes{
     public $ciudad;
     public $estado;
     public $cp;
-   // public $clienteId;
+    public $idusuarios;
 
 
     public function __construct($args = []){
@@ -154,6 +154,14 @@ class Clientes{
 
         if(!$this->colonia){
             self::$errores[] = "Debes añadir una colonia";
+        }
+
+        if(!$this->ciudad){
+            self::$errores[] = "Debes añadir una ciudad";
+        }
+
+        if(!$this->cp){
+            self::$errores[] = "Debes añadir un código postal";
         }
 
         return self::$errores;

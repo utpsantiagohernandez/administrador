@@ -1,9 +1,8 @@
 <?php
 require 'app.php';
-
 use App\Clientes;
-
-$clientesBD = Clientes::find(3);
+$clientesBD = Clientes::find(43);
+$bandera = false;
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +13,7 @@ $clientesBD = Clientes::find(3);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Administrador</title>
+  <title>Perfil</title>
   <link rel="icon" href="img/favicon.jpg" type="image/jpg" sizes="32x32">
   <link rel="stylesheet" href="css/all.css" />
   <link rel="stylesheet" href="css/bootstrap.css" />
@@ -32,21 +31,17 @@ $clientesBD = Clientes::find(3);
       <div class="">
         <h1 class="fs-3 my-4">Perfil del cliente</h1>
       </div>
-
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
-
         <div class="list-group" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <button type="button" class="list-group-item list-group-item-action active" aria-current="true" id="v-pills-direccion-tab" data-bs-toggle="pill" data-bs-target="#v-pills-direccion" role="tab" aria-controls="v-pills-direccion" aria-selected="true">Mi dirección</button>
           <button type="button" class="list-group-item list-group-item-action" id="v-pills-configuracion-tab" data-bs-toggle="pill" data-bs-target="#v-pills-configuracion" role="tab" aria-controls="v-pills-seguridad" aria-selected="false">Configuración</button>
           <button type="button" class="list-group-item list-group-item-action" id="v-pills-cuenta-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cuenta" type="button" role="tab" aria-controls="v-pills-cuenta" aria-selected="false">Cuenta</button>
         </div>
-
       </div>
-
       <div class="col-lg-9">
         <div id="messages"></div>
         <div class="card">
@@ -54,7 +49,7 @@ $clientesBD = Clientes::find(3);
             <div class="tab-content" id="v-pills-tabContent">
               <div class="tab-pane fade show active" id="v-pills-direccion" role="tabpanel" aria-labelledby="v-pills-direccion-tab">
                 <?php foreach ($clientesBD as $clienteView) : ?>
-                  <form class="row g-3" id="formDirection" method="post" action="cliente/actualizar.php" enctype="multipart/form-data">
+                  <form class="row g-3" id="formPerfil" method="post" action="cliente/actualizar.php" enctype="multipart/form-data">
                     <input type="hidden" class="form-control" id="inputId" name="aCliente[idclientes]" value="<?php echo $clienteView->idclientes; ?>">
                     <div class="col-12">
                       <label for="inputAddress" class="form-label">Dirección</label>
@@ -86,7 +81,49 @@ $clientesBD = Clientes::find(3);
                       </div>
                     </div>
                   </form>
+                  <?php $bandera = 1; ?>
                 <?php endforeach ?>
+
+                <?php if (!$bandera) { ?>
+                  <input type="hidden" class="form-control" id="inputId" name="aCliente[idclientes]" value="43">
+                  <form class="row g-3" id="formPerfil" method="post" action="cliente/crear.php" enctype="multipart/form-data">
+                    <input type="hidden" class="form-control" id="inputId" name="aCliente[idclientes]">
+                    <div class="col-12">
+                      <label for="inputAddress" class="form-label">Dirección</label>
+                      <input type="text" class="form-control" id="inputAddress" name="aCliente[direccion]">
+                    </div>
+                    <div class="col-12">
+                      <label for="inpuColonia" class="form-label">Colonia</label>
+                      <input type="text" class="form-control" id="inputColonia" name="aCliente[colonia]">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputCity" class="form-label">Ciudad</label>
+                      <input type="text" class="form-control" id="inputCity" name="aCliente[ciudad]">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputState" class="form-label">Estado</label>
+                      <select id="inputState" name="aCliente[estado]" class="form-select">
+                        <option selected>Selecciona</option>
+                        <option>Yucatan</option>
+                        <option>Campeche</option>
+                      </select>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="inputZip" class="form-label">Código Postal</label>
+                      <input type="text" class="form-control" id="inputZip" name="aCliente[cp]">
+                    </div>
+                    <div class="col-12">
+                      <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">Guadar</button>
+                      </div>
+                    </div>
+                  </form>
+
+
+                <?php } ?>
+
+
+
               </div>
               <div class="tab-pane fade" id="v-pills-configuracion" role="tabpanel" aria-labelledby="v-pills-configuracion-tab">
                 <form>
@@ -121,7 +158,7 @@ $clientesBD = Clientes::find(3);
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.js"></script>
   <script type="text/javascript">
-    var frm = $('#formDirection');
+    var frm = $('#formPerfil');
     frm.submit(function(e) {
       e.preventDefault();
       $.ajax({
@@ -140,7 +177,6 @@ $clientesBD = Clientes::find(3);
       });
     });
   </script>
-
 </body>
 
 </html>

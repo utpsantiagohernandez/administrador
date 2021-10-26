@@ -1,6 +1,5 @@
 <?php
 require '../app.php';
-
 use App\Clientes;
 
 //Obtener los datos de la propiedad

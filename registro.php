@@ -49,8 +49,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mt-3">
                                     <a href="#" class="btn btn-link">¿Olvidó su contraseña?</a>
-                                    <a href="login.html
-                                    " class="btn btn-link">Iniciar sesión</a>
+                                    <a href="login.php" class="btn btn-link">Iniciar sesión</a>
                                 </div>
                             </div>
                     </div>

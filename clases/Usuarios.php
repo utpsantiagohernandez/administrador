@@ -70,7 +70,7 @@ class Usuarios{
         $atributos = $this->atributos();
         $sanitizado = [];
         foreach($atributos as $key => $value){
-            $sanitizado[$key] = self::$db->escape_string(md5($value));
+            $sanitizado[$key] = self::$db->escape_string($value);
         }
         return $sanitizado;
     }
@@ -146,8 +146,11 @@ class Usuarios{
             self::$errores[] = "Debes añadir un correo electrónico";
         }
 
+        if(!$this->contrasenia){
+            self::$errores[] = "Debes añadir una contraseña";
+        }
+
         return self::$errores;
     }
-
-    
+   
 }
