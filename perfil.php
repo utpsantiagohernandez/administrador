@@ -2,11 +2,11 @@
 require 'app.php';
 
 use App\Usuarios;
-$usuariosBD = Usuarios::find(44);
+$usuariosBD = Usuarios::find(45); 
 
 use App\Clientes;
-$clientesBD = Clientes::find(2);
-$bandera = false;
+$clientesBD = Clientes::find(3);
+$bandera = false; 
 ?>
 
 <!DOCTYPE html>
@@ -86,14 +86,14 @@ $bandera = false;
                       </div>
                     </div>
                   </form>
-                  <?php $bandera = 1; ?>
+                  <?php $bandera = true; ?>
                 <?php endforeach ?>
 
                 <?php if (!$bandera) { ?>
 
                   <form class="row g-3" id="formPerfil" method="post" action="cliente/crear.php" enctype="multipart/form-data">
                     <?php foreach ($usuariosBD as $usuarioView) : ?>
-                      <input type="text" class="form-control" id="inputId" name="aCliente[usuarios_idusuarios]" value="<?php echo $usuarioView->idusuarios; ?>">
+                      <input type="hidden" class="form-control" id="inputIdUsuarios" name="aCliente[usuarios_idusuarios]"  value="<?php echo $usuarioView->idusuarios; ?>">
                     <?php endforeach ?>
                     <div class="col-12">
                       <label for="inputAddress" class="form-label">Dirección</label>
