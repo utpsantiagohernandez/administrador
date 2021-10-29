@@ -6,7 +6,7 @@ class Clientes{
 
     //Base de datos
     protected static $db;
-    protected static $columnasDB = ['idclientes', 'direccion','colonia', 'ciudad', 'estado', 'cp','idusuarios'];
+    protected static $columnasDB = ['idclientes', 'direccion','colonia', 'ciudad', 'estado', 'cp','usuarios_idusuarios'];
     protected static $errores = [];
 
     public $idclientes;
@@ -15,7 +15,7 @@ class Clientes{
     public $ciudad;
     public $estado;
     public $cp;
-    public $idusuarios;
+    public $usuarios_idusuarios;
 
 
     public function __construct($args = []){
@@ -25,6 +25,7 @@ class Clientes{
         $this->ciudad = $args['ciudad'] ?? '';
         $this->estado = $args['estado'] ?? '';
         $this->cp = $args['cp'] ?? '';
+        $this->usuarios_idusuarios = $args['usuarios_idusuarios'] ?? '';
     }
 
     // Definir la conexión a la BD
@@ -34,7 +35,7 @@ class Clientes{
 
     public function save(){
 
-        if(!is_null($this->idclientes)){
+        if(!empty($this->idclientes)){
             $this->update();
         }else{
             $this->create();
@@ -52,10 +53,7 @@ class Clientes{
         $query.=" ')";
 
         $resultado = self::$db->query($query);
-        if($resultado){
-            //Redireccionar al cliente
-            header('Location: ../perfil.php');
-        }
+        return $resultado;
     }
 
     public function update(){

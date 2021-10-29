@@ -1,15 +1,16 @@
 <?php
 require '../app.php';
-
 use App\Clientes;
-
 $errores = Clientes::getErrores();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $clientesObj = new Clientes($_POST['aCliente']);
     $errores = $clientesObj->validar();
 
     if (empty($errores)) {
-
+        $args = $_POST['aCliente'];
+        $resultado = $clientesObj->save();
     }
 ?>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">

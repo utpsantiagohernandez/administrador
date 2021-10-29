@@ -1,10 +1,8 @@
 <?php
 require '../app.php';
 use App\Clientes;
-
-//Obtener los datos de la propiedad
-$clientesBD = Clientes::find(3);
 $errores = Clientes::getErrores();
+$clientesBD = Clientes::find(2); //Obtener los datos de la propiedad
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

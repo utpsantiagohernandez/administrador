@@ -1,7 +1,11 @@
 <?php
 require 'app.php';
+
+use App\Usuarios;
+$usuariosBD = Usuarios::find(44);
+
 use App\Clientes;
-$clientesBD = Clientes::find(43);
+$clientesBD = Clientes::find(2);
 $bandera = false;
 ?>
 
@@ -50,7 +54,8 @@ $bandera = false;
               <div class="tab-pane fade show active" id="v-pills-direccion" role="tabpanel" aria-labelledby="v-pills-direccion-tab">
                 <?php foreach ($clientesBD as $clienteView) : ?>
                   <form class="row g-3" id="formPerfil" method="post" action="cliente/actualizar.php" enctype="multipart/form-data">
-                    <input type="hidden" class="form-control" id="inputId" name="aCliente[idclientes]" value="<?php echo $clienteView->idclientes; ?>">
+                    <input type="hidden" class="form-control" id="inputIdClientes" name="aCliente[idclientes]" value="<?php echo $clienteView->idclientes; ?>">
+                    <input type="hidden" class="form-control" id="inputIdUsuarios" name="aCliente[usuarios_idusuarios]" value="<?php echo $clienteView->usuarios_idusuarios; ?>">
                     <div class="col-12">
                       <label for="inputAddress" class="form-label">Dirección</label>
                       <input type="text" class="form-control" id="inputAddress" name="aCliente[direccion]" value="<?php echo $clienteView->direccion; ?>">
@@ -85,9 +90,11 @@ $bandera = false;
                 <?php endforeach ?>
 
                 <?php if (!$bandera) { ?>
-                  <input type="hidden" class="form-control" id="inputId" name="aCliente[idclientes]" value="43">
+
                   <form class="row g-3" id="formPerfil" method="post" action="cliente/crear.php" enctype="multipart/form-data">
-                    <input type="hidden" class="form-control" id="inputId" name="aCliente[idclientes]">
+                    <?php foreach ($usuariosBD as $usuarioView) : ?>
+                      <input type="text" class="form-control" id="inputId" name="aCliente[usuarios_idusuarios]" value="<?php echo $usuarioView->idusuarios; ?>">
+                    <?php endforeach ?>
                     <div class="col-12">
                       <label for="inputAddress" class="form-label">Dirección</label>
                       <input type="text" class="form-control" id="inputAddress" name="aCliente[direccion]">
