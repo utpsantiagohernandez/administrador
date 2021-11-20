@@ -2,11 +2,12 @@
 require 'app.php';
 
 use App\Usuarios;
-$usuariosBD = Usuarios::find(45); 
+$usuariosBD = Usuarios::find(45);
 
 use App\Clientes;
 $clientesBD = Clientes::find(3);
-$bandera = false; 
+
+$bandera = false;
 ?>
 
 <!DOCTYPE html>
@@ -88,12 +89,10 @@ $bandera = false;
                   </form>
                   <?php $bandera = true; ?>
                 <?php endforeach ?>
-
                 <?php if (!$bandera) { ?>
-
                   <form class="row g-3" id="formPerfil" method="post" action="cliente/crear.php" enctype="multipart/form-data">
                     <?php foreach ($usuariosBD as $usuarioView) : ?>
-                      <input type="hidden" class="form-control" id="inputIdUsuarios" name="aCliente[usuarios_idusuarios]"  value="<?php echo $usuarioView->idusuarios; ?>">
+                      <input type="hidden" class="form-control" id="inputIdUsuarios" name="aCliente[usuarios_idusuarios]" value="<?php echo $usuarioView->idusuarios; ?>">
                     <?php endforeach ?>
                     <div class="col-12">
                       <label for="inputAddress" class="form-label">Dirección</label>
@@ -125,12 +124,7 @@ $bandera = false;
                       </div>
                     </div>
                   </form>
-
-
                 <?php } ?>
-
-
-
               </div>
               <div class="tab-pane fade" id="v-pills-configuracion" role="tabpanel" aria-labelledby="v-pills-configuracion-tab">
                 <form>
@@ -149,11 +143,40 @@ $bandera = false;
                   </div>
                 </form>
               </div>
-
               <div class="tab-pane fade" id="v-pills-cuenta" role="tabpanel" aria-labelledby="v-pills-cuenta-tab">
                 <h3 class="fs-4">Cuidado</h3>
                 <p>Este apartado es para poder eliminar tu cuenta.</p>
-                <button class="btn btn-lg btn-danger">Eliminar</button>
+                <button class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarCliente">Eliminar</button>
+                <!-- Modal -->
+                <div class="modal fade" id="eliminarCliente" tabindex="-1" aria-labelledby="EliminarClienteMensaje" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="EliminarClienteMensaje">Cuidado</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <?php foreach ($clientesBD as $clienteView) : ?>
+                        <form class="row g-3" id="formEliminar" method="post" action="cliente/actualizar.php" enctype="multipart/form-data">
+                          <input type="hidden" class="form-control" id="inputIdClientes" name="aCliente[idclientes]" value="<?php echo $clienteView->idclientes; ?>">
+                          <input type="hidden" class="form-control" id="inputAddress" name="aCliente[direccion]" value="<?php echo $clienteView->direccion; ?>" >
+                          <input type="hidden" class="form-control" id="inputColonia" name="aCliente[colonia]"  value="<?php echo $clienteView->colonia; ?>">
+                          <input type="hidden" class="form-control" id="inputCity" name="aCliente[ciudad]" value="<?php echo $clienteView->ciudad; ?>">
+                          <input type="hidden" class="form-control" id="inputZip" name="aCliente[cp]" value="<?php echo $clienteView->cp; ?>">
+                          <input type="hidden" class="form-control" id="inputIdUsuarios" name="aCliente[usuarios_idusuarios]" value="<?php echo $clienteView->usuarios_idusuarios; ?>">
+                          <input type="hidden" class="form-control" id="inputEstatus" name="aCliente[estatus]" value="0">
+                      <?php endforeach ?>
+                          <div class="modal-body">
+                            <p>¿Esta seguro/a de eliminar su cuenta?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                          </div>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -164,6 +187,7 @@ $bandera = false;
 
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.js"></script>
+
   <script type="text/javascript">
     var frm = $('#formPerfil');
     frm.submit(function(e) {
@@ -184,6 +208,29 @@ $bandera = false;
       });
     });
   </script>
+
+<script type="text/javascript">
+    var frm = $('#formEliminar');
+    frm.submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+        type: frm.attr('method'),
+        url: frm.attr('action'),
+        data: frm.serialize(),
+        success: function(data) {
+          console.log('Submission was successful.');
+          console.log(data);
+          $('#messages').html(data);
+        },
+        error: function(data) {
+          console.log('An error occurred.');
+          console.log(data);
+        },
+      });
+    });
+  </script>
+
+  
 </body>
 
 </html>

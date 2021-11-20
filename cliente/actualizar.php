@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </svg>
                 <div>
                     <strong>¡Éxito!</strong><br>
-                    La información del cliente se ha guardado con éxito.
+                    La operación se ha realizo con éxito.
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

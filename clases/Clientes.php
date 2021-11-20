@@ -6,7 +6,7 @@ class Clientes{
 
     //Base de datos
     protected static $db;
-    protected static $columnasDB = ['idclientes', 'direccion','colonia', 'ciudad', 'estado', 'cp','usuarios_idusuarios'];
+    protected static $columnasDB = ['idclientes', 'direccion','colonia', 'ciudad', 'estado', 'cp','usuarios_idusuarios', 'estatus'];
     protected static $errores = [];
 
     public $idclientes;
@@ -16,6 +16,7 @@ class Clientes{
     public $estado;
     public $cp;
     public $usuarios_idusuarios;
+    public $estatus;
 
 
     public function __construct($args = []){
@@ -26,6 +27,7 @@ class Clientes{
         $this->estado = $args['estado'] ?? '';
         $this->cp = $args['cp'] ?? '';
         $this->usuarios_idusuarios = $args['usuarios_idusuarios'] ?? '';
+        $this->estatus = $args['estatus'] ?? '';
     }
 
     // Definir la conexión a la BD
@@ -102,7 +104,7 @@ class Clientes{
 
     //Busca un registro por su id
     public static function find($id){
-        $query ="SELECT * FROM clientes WHERE idclientes = ${id}";
+        $query ="SELECT * FROM clientes WHERE idclientes = ${id} and estatus=1";
         $resultado = self::consultar($query);
         return $resultado;
     }
