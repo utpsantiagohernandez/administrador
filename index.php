@@ -1,5 +1,7 @@
 <?php
 	require 'app.php';
+    use App\Customers;
+    $customersBD = Customers::all();
 
  ?>
 
@@ -68,10 +70,6 @@
         </div>
     </nav>
 
-
-
-   
-
     <main class="mt-4">
         <div class="container">
             <h1>Bienvenid@ a la UTPoniente</h1>
@@ -80,6 +78,38 @@
             <a href="#" class="btn btn-lg btn-primary">Ver accesos rápidos</a>
         </div>
     </main>
+
+    
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Operaciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach ($customersBD as $customersView) : ?>
+    <tr>
+      <td><?php echo $customersView->name;?></td>
+      <td><?php echo $customersView->email; ?></td>
+      <td><button class="btn btn-primary">Editar</button></td>
+      <td><button class="btn btn-danger">Eliminar</button></td>
+    </tr>
+    <?php endforeach ?>
+  </tbody>
+</table>
+
+</div>
+
+
+
+
+   
+
+
+
 
 
     <script src="js/bootstrap.js"></script>
