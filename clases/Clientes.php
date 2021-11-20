@@ -6,7 +6,7 @@ class Clientes{
 
     //Base de datos
     protected static $db;
-    protected static $columnasDB = ['idclientes', 'direccion','colonia', 'ciudad', 'estado', 'cp','usuarios_idusuarios', 'estatus'];
+    protected static $columnasDB = ['idclientes', 'direccion','colonia', 'ciudad', 'estado', 'cp','estatus','usuarios_idusuarios'];
     protected static $errores = [];
 
     public $idclientes;
@@ -15,9 +15,8 @@ class Clientes{
     public $ciudad;
     public $estado;
     public $cp;
-    public $usuarios_idusuarios;
     public $estatus;
-
+    public $usuarios_idusuarios;
 
     public function __construct($args = []){
         $this->idclientes = $args['idclientes'] ?? '';
@@ -26,8 +25,8 @@ class Clientes{
         $this->ciudad = $args['ciudad'] ?? '';
         $this->estado = $args['estado'] ?? '';
         $this->cp = $args['cp'] ?? '';
-        $this->usuarios_idusuarios = $args['usuarios_idusuarios'] ?? '';
         $this->estatus = $args['estatus'] ?? '';
+        $this->usuarios_idusuarios = $args['usuarios_idusuarios'] ?? '';
     }
 
     // Definir la conexión a la BD

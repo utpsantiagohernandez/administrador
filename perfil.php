@@ -2,10 +2,10 @@
 require 'app.php';
 
 use App\Usuarios;
-$usuariosBD = Usuarios::find(45);
+$usuariosBD = Usuarios::find(1);
 
 use App\Clientes;
-$clientesBD = Clientes::find(3);
+$clientesBD = Clientes::find(1);
 
 $bandera = false;
 ?>
@@ -56,6 +56,7 @@ $bandera = false;
                 <?php foreach ($clientesBD as $clienteView) : ?>
                   <form class="row g-3" id="formPerfil" method="post" action="cliente/actualizar.php" enctype="multipart/form-data">
                     <input type="hidden" class="form-control" id="inputIdClientes" name="aCliente[idclientes]" value="<?php echo $clienteView->idclientes; ?>">
+                    <input type="hidden" class="form-control" id="inputEstatus" name="aCliente[estatus]" value="<?php echo $clienteView->estatus; ?>">
                     <input type="hidden" class="form-control" id="inputIdUsuarios" name="aCliente[usuarios_idusuarios]" value="<?php echo $clienteView->usuarios_idusuarios; ?>">
                     <div class="col-12">
                       <label for="inputAddress" class="form-label">Dirección</label>
@@ -162,9 +163,9 @@ $bandera = false;
                           <input type="hidden" class="form-control" id="inputColonia" name="aCliente[colonia]"  value="<?php echo $clienteView->colonia; ?>">
                           <input type="hidden" class="form-control" id="inputCity" name="aCliente[ciudad]" value="<?php echo $clienteView->ciudad; ?>">
                           <input type="hidden" class="form-control" id="inputZip" name="aCliente[cp]" value="<?php echo $clienteView->cp; ?>">
-                          <input type="hidden" class="form-control" id="inputIdUsuarios" name="aCliente[usuarios_idusuarios]" value="<?php echo $clienteView->usuarios_idusuarios; ?>">
                           <input type="hidden" class="form-control" id="inputEstatus" name="aCliente[estatus]" value="0">
-                      <?php endforeach ?>
+                          <input type="hidden" class="form-control" id="inputIdUsuarios" name="aCliente[usuarios_idusuarios]" value="<?php echo $clienteView->usuarios_idusuarios; ?>">
+                        <?php endforeach ?>
                           <div class="modal-body">
                             <p>¿Esta seguro/a de eliminar su cuenta?</p>
                           </div>
@@ -189,13 +190,13 @@ $bandera = false;
   <script src="js/bootstrap.js"></script>
 
   <script type="text/javascript">
-    var frm = $('#formPerfil');
-    frm.submit(function(e) {
+    var frm1 = $('#formPerfil');
+    frm1.submit(function(e) {
       e.preventDefault();
       $.ajax({
-        type: frm.attr('method'),
-        url: frm.attr('action'),
-        data: frm.serialize(),
+        type: frm1.attr('method'),
+        url: frm1.attr('action'),
+        data: frm1.serialize(),
         success: function(data) {
           console.log('Submission was successful.');
           console.log(data);
@@ -210,13 +211,13 @@ $bandera = false;
   </script>
 
 <script type="text/javascript">
-    var frm = $('#formEliminar');
-    frm.submit(function(e) {
+    var frm2 = $('#formEliminar');
+    frm2.submit(function(e) {
       e.preventDefault();
       $.ajax({
-        type: frm.attr('method'),
-        url: frm.attr('action'),
-        data: frm.serialize(),
+        type: frm2.attr('method'),
+        url: frm2.attr('action'),
+        data: frm2.serialize(),
         success: function(data) {
           console.log('Submission was successful.');
           console.log(data);
