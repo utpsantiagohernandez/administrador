@@ -42,7 +42,7 @@
                                 <label class="form-check-label" for="exampleCheck1">Recordarme</label>
                             </div>
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                                <a href="index.php" class="btn btn-primary" id="boton-sesion">Iniciar sesión</a>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mt-3">
                                 <a href="#" class="btn btn-link">¿Olvidó su contraseña?</a>
@@ -73,6 +73,13 @@
         </div>
     </footer>
     <script src="js/bootstrap.js"></script>
+    <script>
+        document.getElementById("boton-sesion").addEventListener("click", paginaPrincipal);
+        function paginaPrincipal() {
+            window.location.href = 'http://www.google.com'; 
+        }
+
+    </script>
 </body>
 
 </html>

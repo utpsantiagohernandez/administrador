@@ -1,118 +1,65 @@
-<?php
-	require 'app.php';
-    use App\Customers;
-    $customersBD = Customers::all();
-
- ?>
-
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <title>Principal</title>
+  </head>
+  <body>
+    <?php include "components/menu.php" ?>
 
-    <title>Administrador</title>
-    <link rel="icon" href="img/favicon.jpg" type="image/jpg" sizes="32x32">
-    <link rel="stylesheet" href="css/all.css" />
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
-</head>
+    <h1>Tiendas</h1>
 
-<body>
- 
+    <div class="container">
 
+        <div class="row justify-content-center">
+            <div class="col-sm-10">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="img/logotipo.png" alt="logotipo.svg" width="154" height="64">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuDeNavegacion"
-                aria-controls="menuDeNavegacion" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="menuDeNavegacion">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Oferta educativa
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Tecnico Superior Univesitario</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Licenciaturas e Ingenierías</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Universidad</a>
-                    </li>
-                </ul>
-                <a href="registro.html" class="btn btn-primary btn-sm">Explorar proyectos</a>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Control escolar</a>
-                    </li>
-                </ul>
-                <a href="#" class="btn btn-link"><i class="fas fa-envelope me-1 rounded-circle"></i>Contáctanos</a>
+            <div class="row">
+                <div class="col-3">
+                    <button type="button" class="btn btn-dark btn-lg py-5 px-5">
+                        <img src="img/walmart.png" alt="walmart.png" class="img-fluid"> 
+                        <span class="badge rounded-pill bg-primary">Inmediato</span>
+                    </button>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-dark btn-lg py-5 px-5">
+                        <img src="img/walmart.png" alt="walmart.png" class="img-fluid"> 
+                        <span class="badge rounded-pill bg-primary">Inmediato</span>
+                    </button>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-dark btn-lg py-5 px-5">
+                        <img src="img/walmart.png" alt="walmart.png" class="img-fluid"> 
+                        <span class="badge rounded-pill bg-primary">Inmediato</span>
+                    </button>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-dark btn-lg py-5 px-5">
+                        <img src="img/walmart.png" alt="walmart.png" class="img-fluid"> 
+                        <span class="badge rounded-pill bg-primary">Inmediato</span>
+                    </button>
+                </div>
             </div>
         </div>
-    </nav>
-
-    <main class="mt-4">
-        <div class="container">
-            <h1>Bienvenid@ a la UTPoniente</h1>
-            <p>Somos una universidad joven que trabaja cada día por la calidad académica y la excelencia institucional.
-            </p>
-            <a href="#" class="btn btn-lg btn-primary">Ver accesos rápidos</a>
         </div>
-    </main>
 
+    </div>
     
-<div class="container">
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Operaciones</th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php foreach ($customersBD as $customersView) : ?>
-    <tr>
-      <td><?php echo $customersView->name;?></td>
-      <td><?php echo $customersView->email; ?></td>
-      <td><button class="btn btn-primary">Editar</button></td>
-      <td><button class="btn btn-danger">Eliminar</button></td>
-    </tr>
-    <?php endforeach ?>
-  </tbody>
-</table>
 
-</div>
+    <!-- Optional JavaScript; choose one of the two! -->
 
-
-
-
-   
-
-
-
-
-
+    <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="js/bootstrap.js"></script>
-</body>
 
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
 </html>

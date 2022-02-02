@@ -2,10 +2,10 @@
 require 'app.php';
 
 use App\Usuarios;
-$usuariosBD = Usuarios::find(1);
+$usuariosBD = Usuarios::find(2);
 
 use App\Clientes;
-$clientesBD = Clientes::find(1);
+$clientesBD = Clientes::find(2);
 
 $bandera = false;
 ?>
@@ -44,6 +44,7 @@ $bandera = false;
         <div class="list-group" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <button type="button" class="list-group-item list-group-item-action active" aria-current="true" id="v-pills-direccion-tab" data-bs-toggle="pill" data-bs-target="#v-pills-direccion" role="tab" aria-controls="v-pills-direccion" aria-selected="true">Mi dirección</button>
           <button type="button" class="list-group-item list-group-item-action" id="v-pills-configuracion-tab" data-bs-toggle="pill" data-bs-target="#v-pills-configuracion" role="tab" aria-controls="v-pills-seguridad" aria-selected="false">Configuración</button>
+          <button type="button" class="list-group-item list-group-item-action" id="v-pills-pagos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-pagos" type="button" role="tab" aria-controls="v-pills-pagos" aria-selected="false">Formas de pago</button>
           <button type="button" class="list-group-item list-group-item-action" id="v-pills-cuenta-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cuenta" type="button" role="tab" aria-controls="v-pills-cuenta" aria-selected="false">Cuenta</button>
         </div>
       </div>
@@ -159,24 +160,92 @@ $bandera = false;
                       <?php foreach ($clientesBD as $clienteView) : ?>
                         <form class="row g-3" id="formEliminar" method="post" action="cliente/actualizar.php" enctype="multipart/form-data">
                           <input type="hidden" class="form-control" id="inputIdClientes" name="aCliente[idclientes]" value="<?php echo $clienteView->idclientes; ?>">
-                          <input type="hidden" class="form-control" id="inputAddress" name="aCliente[direccion]" value="<?php echo $clienteView->direccion; ?>" >
-                          <input type="hidden" class="form-control" id="inputColonia" name="aCliente[colonia]"  value="<?php echo $clienteView->colonia; ?>">
+                          <input type="hidden" class="form-control" id="inputAddress" name="aCliente[direccion]" value="<?php echo $clienteView->direccion; ?>">
+                          <input type="hidden" class="form-control" id="inputColonia" name="aCliente[colonia]" value="<?php echo $clienteView->colonia; ?>">
                           <input type="hidden" class="form-control" id="inputCity" name="aCliente[ciudad]" value="<?php echo $clienteView->ciudad; ?>">
                           <input type="hidden" class="form-control" id="inputZip" name="aCliente[cp]" value="<?php echo $clienteView->cp; ?>">
                           <input type="hidden" class="form-control" id="inputEstatus" name="aCliente[estatus]" value="0">
                           <input type="hidden" class="form-control" id="inputIdUsuarios" name="aCliente[usuarios_idusuarios]" value="<?php echo $clienteView->usuarios_idusuarios; ?>">
                         <?php endforeach ?>
-                          <div class="modal-body">
-                            <p>¿Esta seguro/a de eliminar su cuenta?</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
-                          </div>
+                        <div class="modal-body">
+                          <p>¿Esta seguro/a de eliminar su cuenta?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                        </div>
                         </form>
                     </div>
                   </div>
                 </div>
+
+              </div>
+              <div class="tab-pane fade" id="v-pills-pagos" role="tabpanel" aria-labelledby="v-pills-pagos-tab">
+
+
+
+                <form role="form" class="w-75 d-block justify-content-center py-4 mx-0">
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Nombre del propietario de la tarjeta</label>
+                    <input type="text" class="form-control" name="username" placeholder="Ejemplo: Juan Pérez" required="">
+                  </div> <!-- form-group.// -->
+
+                  <div class="mb-3">
+                    <label for="cardNumber" class="form-label" >Número de tarjeta</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" name="cardNumber" placeholder="Ejemplo: 4312 4556 5678 8871">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fab fa-cc-visa"></i> &nbsp; <i class="fab fa-cc-amex"></i> &nbsp;
+                          <i class="fab fa-cc-mastercard"></i>
+                        </span>
+                      </div>
+                    </div> <!-- input-group.// -->
+                  </div> <!-- form-group.// -->
+                  <div class="row g-3 mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label"><span class="hidden-xs">Caducidad</span> </label>
+                        <select class="form-control">
+                            <option>Seleccione el mes</option>
+                            <option>Enero</option>
+                            <option>Febrero</option>
+                            <option>Marzo</option>
+                            <option>Abril</option>
+                            <option>Mayo</option>
+                            <option>Junio</option>
+                            <option>Julio</option>
+                            <option>Agosto</option>
+                            <option>Septiembre</option>
+                            <option>Octubre</option>
+                            <option>Noviembre</option>
+                            <option>Diciembre</option>
+                          </select>
+                         
+                      </div>
+                      <div class="col-md-3">
+                      <label class="form-label"><span class="hidden-xs">/</span> </label>
+                        <input type="number" class="form-control" name="anio" placeholder="Ejemplo: 2021">
+                      </div>
+                   
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label" data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
+                        <input class="form-control" required="" type="text" placeholder="Ejemplo: 657">
+                      </div> <!-- form-group.// -->
+                    </div>
+                  </div> <!-- row.// -->
+
+
+                  <div class="d-grid gap-2">
+                    <button class="subscribe btn btn-primary btn-block" type="button"> Guardar </button>
+                  </div>
+                
+                
+                </form>
+
+
+
+
 
               </div>
             </div>
@@ -210,7 +279,7 @@ $bandera = false;
     });
   </script>
 
-<script type="text/javascript">
+  <script type="text/javascript">
     var frm2 = $('#formEliminar');
     frm2.submit(function(e) {
       e.preventDefault();
@@ -231,7 +300,7 @@ $bandera = false;
     });
   </script>
 
-  
+
 </body>
 
 </html>
